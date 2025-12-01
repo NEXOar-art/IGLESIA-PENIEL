@@ -19,11 +19,16 @@
             --light: #F4F4F4;       /* Gris fondo */
             --white: #ffffff;
             --whatsapp: #25D366;    /* Verde WhatsApp */
+            
+            /* Colores Redes Sociales */
+            --youtube: #FF0000;
+            --facebook: #1877F2;
+            --instagram: #E1306C;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; } /* Desplazamiento suave al navegar */
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -71,7 +76,7 @@
 
         nav a:hover { color: var(--accent); }
 
-        /* --- ESTILOS DEL REPRODUCTOR FLOTANTE (NUEVO) --- */
+        /* --- ESTILOS DEL REPRODUCTOR FLOTANTE --- */
         .music-control {
             position: fixed;
             bottom: 30px;
@@ -100,7 +105,6 @@
             border-color: var(--primary);
         }
 
-        /* Animación de barras musicales */
         .music-bars {
             display: flex;
             align-items: flex-end;
@@ -115,7 +119,6 @@
             height: 30%;
         }
 
-        /* Cuando está sonando, las barras se mueven */
         .music-control.playing .bar {
             animation: bounce 1s infinite ease-in-out;
         }
@@ -134,7 +137,7 @@
             to { opacity: 1; }
         }
 
-        /* --- HERO SECTION (VIDEO) --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
             position: relative;
@@ -163,7 +166,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.45); /* Capa oscura para leer texto */
+            background: rgba(0, 0, 0, 0.45);
             z-index: -1;
         }
 
@@ -377,13 +380,62 @@
 
         .btn-whatsapp:hover { background: #128C7E; }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER & REDES SOCIALES --- */
         footer {
             background: #1a252f;
             color: #95a5a6;
-            padding: 40px 5%;
+            padding: 60px 5% 40px; /* Más padding arriba para aire */
             text-align: center;
             border-top: 5px solid var(--accent);
+        }
+
+        .footer-content h3 {
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .social-section {
+            margin: 30px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Colores específicos al hacer hover */
+        .social-link.youtube:hover { background: var(--youtube); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(255,0,0,0.3); }
+        .social-link.facebook:hover { background: var(--facebook); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(24,119,242,0.3); }
+        .social-link.instagram:hover { 
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(225,48,108,0.3);
         }
 
         /* --- MEDIA QUERIES --- */
@@ -394,7 +446,6 @@
             nav { display: none; } 
             .logo { font-size: 1.1rem; }
             
-            /* Ajuste video móvil para cubrir pantalla */
             .video-bg { 
                 width: auto; 
                 height: 100%; 
@@ -432,7 +483,7 @@
 
     <header>
         <div class="logo">
-            <i class="fas fa-church"></i> PENIEL CAMPANA
+            <i class="fas fa-church"></i> COMPLEJO PENIEL CAMPANA
         </div>
         <nav>
             <a href="#inicio">Inicio</a>
@@ -545,10 +596,24 @@
 
     <footer>
         <div class="footer-content">
-            <p style="font-size: 1.1rem; color: white; font-weight: 600;">Complejo Evangelístico Peniel</p>
+            <h3>Complejo Evangelístico Peniel</h3>
             <p>M. Barca 2141, Campana, Provincia de Buenos Aires</p>
             <p>Contacto: itpeniel17@gmail.com</p>
-            <br>
+
+            <div class="social-section">
+                <p class="social-title">Síguenos en redes</p>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/c/ComplejoEvangelísticoPeniel" target="_blank" class="social-link youtube" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.facebook.com/ComplejoEPeniel" target="_blank" class="social-link facebook" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/complejoepeniel" target="_blank" class="social-link instagram" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
             <p style="font-size: 0.8rem;">&copy; 2025 Peniel Campana. Todos los derechos reservados.</p>
         </div>
     </footer>
@@ -559,10 +624,8 @@
         const musicBtn = document.getElementById('musicBtn');
         const musicText = document.getElementById('musicText');
         
-        // Ajustamos volumen para que sea agradable de fondo (40%)
         audio.volume = 0.4;
 
-        // Función para cambiar estado (Play/Pause)
         function toggleMusic() {
             if (audio.paused) {
                 audio.play();
@@ -579,20 +642,14 @@
 
         musicBtn.addEventListener('click', toggleMusic);
 
-        // Intentar reproducción automática al cargar
-        // Nota: Muchos navegadores bloquean esto si no hubo click antes, 
-        // por eso el botón cambiará su texto si falla.
         window.addEventListener('load', () => {
             const playPromise = audio.play();
-            
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    // Si el navegador permitió el autoplay:
                     musicBtn.classList.remove('paused');
                     musicBtn.classList.add('playing');
                     musicText.innerText = "Pausar";
                 }).catch(error => {
-                    // Si el navegador bloqueó el autoplay (muy común):
                     console.log("Autoplay bloqueado, esperando interacción del usuario.");
                     musicBtn.classList.add('paused');
                     musicText.innerText = "Activar Audio";
@@ -601,31 +658,24 @@
         });
 
 
-        // --- LÓGICA WHATSAPP (MODIFICADA PARA EMAIL OPCIONAL) ---
+        // --- LÓGICA WHATSAPP ---
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // 1. Capturar datos y limpiar espacios
             const nombre = document.getElementById('nombre').value.trim();
             const celular = document.getElementById('celular').value.trim();
             const email = document.getElementById('email').value.trim();
 
-            // 2. Lógica para el email opcional:
-            // Si hay email, crea la línea de texto. Si no, deja la cadena vacía.
             const emailTexto = email ? `📧 *Email:* ${email}\n` : '';
 
-            // 3. Construir el mensaje base
             let textoBase = `Hola Peniel! 👋 Bendiciones.\n\n` +
                             `Quisiera contactarme y dejar mis datos:\n` +
                             `👤 *Nombre:* ${nombre}\n` +
                             `📱 *Celular:* ${celular}\n` +
-                            emailTexto + // Aquí insertamos la variable condicional
+                            emailTexto + 
                             `\n🙏 *Motivo:* Quisiera pedir una cadena de oración.`;
 
-            // 4. Codificar el mensaje
             const textoCodificado = encodeURIComponent(textoBase);
-
-            // 5. Redirigir a la API de WhatsApp
             const urlWhatsapp = `https://api.whatsapp.com/send?phone=543489686939&text=${textoCodificado}`;
 
             window.open(urlWhatsapp, '_blank');
@@ -634,5 +684,6 @@
 </body>
 </html>
 "commit"
+
 
 
