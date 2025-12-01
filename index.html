@@ -532,8 +532,8 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" required placeholder="tucorreo@email.com">
+                    <label for="email">E-mail (Opcional)</label>
+                    <input type="email" id="email" name="email" placeholder="tucorreo@email.com">
                 </div>
                 
                 <button type="submit" class="btn-whatsapp">
@@ -601,7 +601,7 @@
         });
 
 
-        // --- LÓGICA WHATSAPP ---
+        // --- LÓGICA WHATSAPP (MODIFICADA PARA EMAIL OPCIONAL) ---
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -610,18 +610,22 @@
             const celular = document.getElementById('celular').value.trim();
             const email = document.getElementById('email').value.trim();
 
-            // 2. Construir el mensaje base
+            // 2. Lógica para el email opcional:
+            // Si hay email, crea la línea de texto. Si no, deja la cadena vacía.
+            const emailTexto = email ? `📧 *Email:* ${email}\n` : '';
+
+            // 3. Construir el mensaje base
             let textoBase = `Hola Peniel! 👋 Bendiciones.\n\n` +
                             `Quisiera contactarme y dejar mis datos:\n` +
                             `👤 *Nombre:* ${nombre}\n` +
                             `📱 *Celular:* ${celular}\n` +
-                            `📧 *Email:* ${email}\n\n` +
-                            `🙏 *Motivo:* Quisiera pedir una cadena de oración.`;
+                            emailTexto + // Aquí insertamos la variable condicional
+                            `\n🙏 *Motivo:* Quisiera pedir una cadena de oración.`;
 
-            // 3. Codificar el mensaje
+            // 4. Codificar el mensaje
             const textoCodificado = encodeURIComponent(textoBase);
 
-            // 4. Redirigir a la API de WhatsApp
+            // 5. Redirigir a la API de WhatsApp
             const urlWhatsapp = `https://api.whatsapp.com/send?phone=543489686939&text=${textoCodificado}`;
 
             window.open(urlWhatsapp, '_blank');
@@ -630,4 +634,5 @@
 </body>
 </html>
 "commit"
+
 
